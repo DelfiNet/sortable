@@ -38,9 +38,13 @@
     },
     initTable: function(table) {
       var i, th, ths, _i, _len, _ref;
-      if (((_ref = table.tHead) != null ? _ref.rows.length : void 0) !== 1) {
-        return;
-      }
+      
+      _ref = table.tHead;
+      if(_ref == null){ console.log('REF = Null'); return; }
+      if(_ref.rows.length == 0){ console.log('Len = 0'); return ;}
+      if(_ref.rows.length !== 1){ ths = table.querySelectorAll('tr[data-sort-row] th'); } // Multi Row Support
+      if(ths == null){ ths = table.querySelectorAll('th'); }
+      
       if (table.getAttribute('data-sortable-initialized') === 'true') {
         return;
       }
@@ -66,7 +70,11 @@
         } else {
           newSortedDirection = type.defaultSortDirection;
         }
-        ths = this.parentNode.querySelectorAll('th');
+        
+        // Add in special "selector" row
+        ths = this.parentNode.querySelectorAll('tr[data-sort-row] th');          
+        if(ths.length == 0){ ths = this.parentNode.querySelectorAll('th'); }
+        
         for (_i = 0, _len = ths.length; _i < _len; _i++) {
           th = ths[_i];
           th.setAttribute('data-sorted', 'false');
