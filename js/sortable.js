@@ -49,7 +49,7 @@
         return;
       }
       table.setAttribute('data-sortable-initialized', 'true');
-      ths = table.querySelectorAll('th');
+      
       for (i = _i = 0, _len = ths.length; _i < _len; i = ++_i) {
         th = ths[i];
         if (th.getAttribute('data-sortable') !== 'false') {
